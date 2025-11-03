@@ -6,6 +6,8 @@ connectDB();
 
 import { Client, GatewayIntentBits } from "discord.js";
 
+import { loadEvents } from "./client/eventLoader.js";
+
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
@@ -14,5 +16,9 @@ const client = new Client({
         GatewayIntentBits.MessageContent,
     ],
 });
+
+client.commands = new Map();
+
+await loadEvents(client);
 
 client.login(process.env.DISCORD_TOKEN);
