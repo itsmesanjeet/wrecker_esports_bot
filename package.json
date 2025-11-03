@@ -1,0 +1,25 @@
+{
+  "name": "wrecker_esports_bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itsmesanjeet/wrecker_esports_bot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/itsmesanjeet/wrecker_esports_bot/issues"
+  },
+  "homepage": "https://github.com/itsmesanjeet/wrecker_esports_bot#readme",
+  "dependencies": {
+    "discord.js": "^14.24.2",
+    "dotenv": "^17.2.3",
+    "mongoose": "^8.19.2"
+  }
+}
