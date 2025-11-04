@@ -1,3 +1,4 @@
+import { EmbedBuilder } from "discord.js";
 import StickyMessage from "../../models/stickyMessageSchema.js";
 
 export async function handleStickyMessage(message) {
@@ -12,10 +13,18 @@ export async function handleStickyMessage(message) {
     if (oldMessage) await oldMessage.delete().catch(() => null);
 
     // Send new sticky message
-    const newSticky = await message.channel.send(stickyData.content);
+    let sentMessage;
+    if (stickyData.isEmbed) {
+      const embed = new EmbedBuilder()
+        .setDescription(stickyData.content)
+        .setColor(stickyData.color)
+      sentMessage = await message.channel.send({ embeds: [embed] });
+    } else {
+      sentMessage = await message.channel.send(stickyData.content);
+    }
 
     // Update messageId in DB
-    stickyData.messageId = newSticky.id;
+    stickyData.messageId = sentMessage.id;
     await stickyData.save();
   } catch (err) {
     console.error("Error handling sticky message:", err);

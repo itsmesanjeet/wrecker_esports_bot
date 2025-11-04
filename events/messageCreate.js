@@ -1,5 +1,6 @@
 import { handleStickyMessage } from "../features/sticky/stickyManager.js";
 import { handleStickyCommand } from "../commands/sticky/stickyCommandHandler.js";
+import { handeStickyEmbedCommand } from "../commands/sticky/stickyEmbedCommandHandler.js";
 
 export default {
   name: "messageCreate",
@@ -16,8 +17,13 @@ export default {
     const args = message.content.slice(prefix.length).trim().split(/ +/);
     const commandName = args.shift().toLowerCase();
 
-    if (commandName === "sticky") {
-      await handleStickyCommand(message, args);
+    switch (commandName) {
+      case "sticky":
+        await handleStickyCommand(message, args);
+        break;
+      case "stickyembed":
+        await handeStickyEmbedCommand(message, args);
+        break;
     }
   },
 };
